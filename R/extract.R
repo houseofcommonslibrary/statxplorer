@@ -1,62 +1,48 @@
-# Functions for extracting tabular data from a request
+# Functions for extracting tabular data from the response JSON
 
 # Functions -------------------------------------------------------------------
 
-extract_cube <- function(response, cube = 1) {
+extract_results <- function(json) {
 
-    fields <- response$fields
-    cubes <- response$cubes
+    # Extract results for each cube into a list
+    results <- purrr::map(1:length(json$cubes), ~ extract_cube(json, .))
 
-    variables <- list(
-        rows = fields[[1]]$label,
-        columns = fields[[2]]$label,
-        wafers = fields[[3]]$label
-    )
+    # Name each cube with its measure and return
+    names(results) <- purrr::map_chr(json$measures,
+                                     function(measure) measure$label)
+    results
+}
 
-    labels <- list(
-        rows = unlist(lapply(fields[[1]]$items, function(x) x$labels)),
-        columns = unlist(lapply(fields[[2]]$items, function(x) x$labels)),
-        wafers = unlist(lapply(fields[[3]]$items, function(x) x$labels))
-    )
+extract_cube <- function(json, cube = 1) {
 
-    dimensions <- list(
-        rows = length(cubes[[cube]][[1]]),
-        columns = length(cubes[[cube]][[1]][[1]]),
-        wafers = length(cubes[[cube]][[1]][[1]][[1]])
-    )
+    # Extract fieldnames
+    fields <- purrr::map_chr(json$fields, function(field) field$label)
 
-    wafers <- purrr::map(1:dimensions$wafers,
-                         ~ extract_wafer(response, cube, .))
+    # Extract and label categories
+    categories <- purrr::map(json$fields, function(field) {
+        unlist(lapply(field$items, function(item) item$labels))
+    })
+    names(categories) <- fields
 
+    # Create the results dataframe and add the data
+    df <- extract_categories_df(categories)
+    df$Value <- unlist(json$cubes[[cube]][[1]])
+
+    # Return the data for this cube
     list(
-        variables = variables,
-        labels = labels,
-        dimensions = dimensions,
-        wafers = wafers
+        fields = fields,
+        categories = categories,
+        df = df
     )
 }
 
-extract_wafer <- function(response, cube, wafer) {
+extract_categories_df <- function(categories) {
 
-    data <- response$cubes[[cube]][[1]]
-    column_count <- length(data[[1]])
+    # Get a list of the categories for each field as dataframes
+    categories <- purrr::imap(categories, function(categories, fieldname) {
+        tibble::tibble(!!fieldname := categories)
+    })
 
-    fields <- response$fields
-    row_labels <- unlist(lapply(fields[[1]]$items, function(x) x$labels))
-    col_labels <- unlist(lapply(fields[[2]]$items, function(x) x$labels))
-    row_labels_col_label <- fields[[1]]$label
-
-    df <- purrr::map_dfc(1:column_count,
-                         ~ extract_column(response, cube, ., wafer))
-
-    colnames(df) <- col_labels
-    row_labels_list <- list()
-    row_labels_list[[row_labels_col_label]] <- row_labels
-    dplyr::bind_cols(row_labels_list, df)
-}
-
-extract_column <- function(response, cube, column, wafer) {
-    data <- response$cubes[[cube]][[1]]
-    row_count <- length(data)
-    purrr::map_dbl(1:row_count, ~ data[[.]][[column]][[wafer]])
+    # Create a dataframe of the combinations in order
+    do.call(tidyr::crossing, categories)
 }
