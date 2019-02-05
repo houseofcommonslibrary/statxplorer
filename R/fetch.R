@@ -15,11 +15,11 @@ TABLE_URL <- "https://stat-xplore.dwp.gov.uk/webapi/rest/v1/table"
 #'
 #' @param query A valid Stat-Xplore query as a string.
 #' @return A list of the query results as parsed json.
-#' @keywords internal
+#' @export
 
 request_table <- function(query) {
 
-    # Get API key from cache
+    # Get api key from cache
     api_key <- get_api_key()
 
     # Set headers
@@ -63,20 +63,22 @@ request_table <- function(query) {
 #' df - a dataframe of the categories and values in long form (tibble)
 #'
 #' @param query Stat-Xplore query as a string.
-#' @param queryfile The path to a text file containing a Stat-Xplore query.
-#'   This argument is not required but has priority: if a \code{queryfile} is
+#' @param filename The path to a text file containing a Stat-Xplore query.
+#'   This argument is not required but has priority: if a \code{filename} is
 #'   provided, the \code{query} argument is ignored.
+#' @param simplify If TRUE and the result contains only one data cube, return
+#'   just that cube. The default value is TRUE.
 #' @return A list containing the results of the query, with one item per cube.
 #' @export
 
-fetch_table <- function(query, queryfile = NULL) {
+fetch_table <- function(query, filename, simplify = TRUE) {
 
     # Read the query from a file if given
-    if (! is.null(queryfile)) query <- readr::read_file(queryfile)
+    if (! is.null(filename)) query <- readr::read_file(filename)
 
     # Send the query and get the response
     response_json <- request_table(query)
 
     # Extract results
-    extract_results(response_json)
+    extract_results(response_json, simplify)
 }
