@@ -1,6 +1,13 @@
-# Functions for extracting tabular data from the response JSON
+# Functions for extracting tabular data from the response json
 
-# Functions -------------------------------------------------------------------
+#' Extract the results of a query from the response
+#'
+#' \code{extract_results} processes the results of the query and extracts the
+#' data in a format suitable for analysis.
+#'
+#' @param json The results of the query as parsed json.
+#' @return A list of the results with one item for each data cube.
+#' @export
 
 extract_results <- function(json) {
 
@@ -13,6 +20,13 @@ extract_results <- function(json) {
     results
 }
 
+#' Extract the results of a query from the response for a given data cube
+#'
+#' @param json The results of the query as parsed json.
+#' @param cube The number of the cube to extract.
+#' @return A list of the results for the given cube.
+#' @keywords internal
+
 extract_cube <- function(json, cube = 1) {
 
     # Extract fieldnames
@@ -24,7 +38,7 @@ extract_cube <- function(json, cube = 1) {
     })
     names(items) <- fields
 
-    # Extract and uris for items
+    # Extract uris for items
     uris <- purrr::map(json$fields, function(field) {
         unlist(lapply(field$items, function(item) item$uris))
     })
@@ -42,6 +56,12 @@ extract_cube <- function(json, cube = 1) {
         df = df
     )
 }
+
+#' Extract a dataframe of the item combinations represented in a query result
+#'
+#' @param items The list of items for a query result.
+#' @return A dataframe of the item combinations represented in the result.
+#' @keywords internal
 
 extract_items_df <- function(items) {
 
