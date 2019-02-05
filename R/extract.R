@@ -18,31 +18,38 @@ extract_cube <- function(json, cube = 1) {
     # Extract fieldnames
     fields <- purrr::map_chr(json$fields, function(field) field$label)
 
-    # Extract and label categories
-    categories <- purrr::map(json$fields, function(field) {
+    # Extract label for items
+    items <- purrr::map(json$fields, function(field) {
         unlist(lapply(field$items, function(item) item$labels))
     })
-    names(categories) <- fields
+    names(items) <- fields
+
+    # Extract and uris for items
+    uris <- purrr::map(json$fields, function(field) {
+        unlist(lapply(field$items, function(item) item$uris))
+    })
+    names(uris) <- fields
 
     # Create the results dataframe and add the data
-    df <- extract_categories_df(categories)
+    df <- extract_items_df(items)
     df$Value <- unlist(json$cubes[[cube]][[1]])
 
     # Return the data for this cube
     list(
         fields = fields,
-        categories = categories,
+        items = items,
+        uris = uris,
         df = df
     )
 }
 
-extract_categories_df <- function(categories) {
+extract_items_df <- function(items) {
 
-    # Get a list of the categories for each field as dataframes
-    categories <- purrr::imap(categories, function(categories, fieldname) {
-        tibble::tibble(!!fieldname := categories)
+    # Get a list of the items for each field as dataframes
+    items <- purrr::imap(items, function(items, field) {
+        tibble::tibble(!!field := items)
     })
 
     # Create a dataframe of the combinations in order
-    do.call(tidyr::crossing, categories)
+    do.call(tidyr::crossing, items)
 }
