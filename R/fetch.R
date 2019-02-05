@@ -45,19 +45,24 @@ request_table <- function(query) {
 #' each cube.
 #'
 #' A query may be provided as a string or can be loaded from a file using the
-#' \code{queryfile} argument. In most cases this is more convenient as
+#' \code{filename} argument. In most cases this is more convenient as
 #' Stat-Xplore queries can be large and are most easily produced using the
 #' table builder tool on the website.
 #'
-#' Stat-Xplore returns one data cube for each measure included in the query
-#' as a wafer. In plain english, cubes that are produced from the same query
-#' will have different results for different measures but within the same table
-#' structure. In the lilst of results cubes are named according to the name of
-#' the measure they represent.
+#' Stat-Xplore returns one data cube of results for each measure included in
+#' the query. In plain english, cubes that are produced from the same query
+#' show different results for different measures but within the same table
+#' structure.
 #'
-#' For each cube a list of the following data is provided:
+#' If a query returns more than one cube, the function returns a list of cubes
+#' where each cube is named according to the name of the measure it contains.
+#' If there is only one cube in the results for a query and \code{simplify} is
+#' set to TRUE (the default), a single cube is returned.
 #'
-#' fields - the names categorical variables represented in the data (list)
+#' In the results of this function, each cube is represented as a list with the
+#' following data items:
+#'
+#' fields - the names of categorical variables represented in the data (list)
 #' items - the names of the categories or levels within each field (list)
 #' uris - the uris of the categories or levels within each field (list)
 #' df - a dataframe of the categories and values in long form (tibble)

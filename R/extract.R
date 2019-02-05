@@ -40,7 +40,7 @@ extract_cube <- function(json, cube) {
     # Extract fieldnames
     fields <- purrr::map_chr(json$fields, function(field) field$label)
 
-    # Extract label for items
+    # Extract labels for items
     items <- purrr::map(json$fields, function(field) {
         unlist(lapply(field$items, function(item) item$labels))
     })
