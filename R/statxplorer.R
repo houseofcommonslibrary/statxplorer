@@ -9,7 +9,7 @@
 #' @importFrom rlang .data
 NULL
 
-# Tell R CMD check about the dot operator in pipelines
+# Tell R CMD check about new operators
 if(getRversion() >= "2.15.1") {
-    utils::globalVariables(c("."))
+    utils::globalVariables(c(".", ":="))
 }

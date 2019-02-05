@@ -18,8 +18,11 @@ Imports:
     jsonlite,
     magrittr,
     purrr,
+    readr,
     rlang,
-    stringr
+    stringr,
+    tibble,
+    tidyr
 Suggests: 
     testthat
 RoxygenNote: 6.1.1
