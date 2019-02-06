@@ -9,3 +9,4 @@ request_error <- function(response) {
     stringr::str_glue(
         "The server responded with the following message: {response}")
 }
+

@@ -1,0 +1,15 @@
+{
+  "database" : "str:database:UC_Households",
+  "measures" : [ "str:count:UC_Households:V_F_UC_HOUSEHOLDS", "str:statfn:UC_Households:V_F_UC_HOUSEHOLDS:HNTOTAL_PAYMENT_AMOUNT:MEAN" ],
+  "recodes" : {
+    "str:field:UC_Households:F_UC_DATE:DATE_NAME" : {
+      "map" : [ [ "str:value:UC_Households:F_UC_DATE:DATE_NAME:C_UC_DATE:201805" ], [ "str:value:UC_Households:F_UC_DATE:DATE_NAME:C_UC_DATE:201806" ], [ "str:value:UC_Households:F_UC_DATE:DATE_NAME:C_UC_DATE:201807" ], [ "str:value:UC_Households:F_UC_DATE:DATE_NAME:C_UC_DATE:201808" ] ],
+      "total" : false
+    },
+    "str:field:UC_Households:V_F_UC_HOUSEHOLDS:COA_CODE" : {
+      "map" : [ [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:COA_CODE:V_C_MASTERGEOG11_REGION_TO_COUNTRY:E12000001" ], [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:COA_CODE:V_C_MASTERGEOG11_REGION_TO_COUNTRY:E12000002" ], [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:COA_CODE:V_C_MASTERGEOG11_REGION_TO_COUNTRY:E12000003" ], [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:COA_CODE:V_C_MASTERGEOG11_REGION_TO_COUNTRY:E12000004" ], [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:COA_CODE:V_C_MASTERGEOG11_REGION_TO_COUNTRY:E12000005" ], [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:COA_CODE:V_C_MASTERGEOG11_REGION_TO_COUNTRY:E12000006" ], [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:COA_CODE:V_C_MASTERGEOG11_REGION_TO_COUNTRY:E12000007" ], [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:COA_CODE:V_C_MASTERGEOG11_REGION_TO_COUNTRY:E12000008" ], [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:COA_CODE:V_C_MASTERGEOG11_REGION_TO_COUNTRY:E12000009" ] ],
+      "total" : true
+    }
+  },
+  "dimensions" : [ [ "str:field:UC_Households:V_F_UC_HOUSEHOLDS:COA_CODE" ], [ "str:field:UC_Households:F_UC_DATE:DATE_NAME" ] ]
+}

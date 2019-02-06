@@ -31,12 +31,14 @@ request_table <- function(query) {
     # POST and retuen
     response <- httr::POST(URL_TABLE, headers, body = query, encode = "form")
 
+    # Extract the text
+    response_text <- httr::content(response, as = "text", encoding = "utf-8")
+
     # If the server returned an error raise it with the response text
     if (response$status_code != 200) stop(request_error(response_text))
 
-    # Extract the text, process as JSON, and extract the data
-    response_text <- httr::content(response, as = "text", encoding = "utf-8")
-    response_json <- jsonlite::fromJSON(response_text, simplifyVector = FALSE)
+    # Process the JSON, and return
+    jsonlite::fromJSON(response_text, simplifyVector = FALSE)
 }
 
 #' Send a table query and return the results
