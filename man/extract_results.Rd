@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract.R
 \name{extract_results}
 \alias{extract_results}
-\title{Extract the results of a query from the response}
+\title{Extract the results of a query from the response json}
 \usage{
 extract_results(json, simplify = TRUE)
 }
@@ -10,10 +10,11 @@ extract_results(json, simplify = TRUE)
 \item{json}{The results of the query as parsed json.}
 
 \item{simplify}{If TRUE and the result contains only one data cube, return
-just that cube. The default value is TRUE.}
+just the measure and datatframe for that cube, otherwise return the
+measures and dataframes in lists. The default value is TRUE.}
 }
 \value{
-A list of the results with one item for each data cube.
+A list of the results for the given cube.
 }
 \description{
 \code{extract_results} processes the results of the query and extracts the

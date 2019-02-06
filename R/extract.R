@@ -1,43 +1,23 @@
-# Functions for extracting tabular data from the response json
+# Functions for extracting tabular data from query results
 
-#' Extract the results of a query from the response
+#' Extract the results of a query from the response json
 #'
 #' \code{extract_results} processes the results of the query and extracts the
 #' data in a format suitable for analysis.
 #'
 #' @param json The results of the query as parsed json.
 #' @param simplify If TRUE and the result contains only one data cube, return
-#'   just that cube. The default value is TRUE.
-#' @return A list of the results with one item for each data cube.
+#'   just the measure and datatframe for that cube, otherwise return the
+#'   measures and dataframes in lists. The default value is TRUE.
+#' @return A list of the results for the given cube.
 #' @export
 
 extract_results <- function(json, simplify = TRUE) {
 
-    # Extract results for each cube into a list
-    results <- purrr::map(1:length(json$cubes), ~ extract_cube(json, .))
+    # Extract measure labels
+    measures <- purrr::map_chr(json$measures, function(measure) measure$label)
 
-    # Name each cube with its measure and return
-    names(results) <- purrr::map_chr(json$measures,
-                                     function(measure) measure$label)
-
-    # Simplify if requested and return
-    if (simplify && length(results) == 1) return(results[[1]])
-    results
-}
-
-#' Extract the results of a query from the response for a given data cube
-#'
-#' @param json The results of the query as parsed json.
-#' @param cube The number of the cube to extract.
-#' @return A list of the results for the given cube.
-#' @keywords internal
-
-extract_cube <- function(json, cube) {
-
-    # Extract the measure name
-    measure <- json$measures[[cube]]$label
-
-    # Extract fieldnames
+    # Extract field labels
     fields <- purrr::map_chr(json$fields, function(field) field$label)
 
     # Extract labels for items
@@ -52,20 +32,33 @@ extract_cube <- function(json, cube) {
     })
     names(uris) <- fields
 
-    # Create the results dataframe and add the data
-    df <- extract_items_df(items)
-    df[[measure]] <- unlist(json$cubes[[cube]][[1]])
+    # Extract dataframes for measures
+    dfs <- purrr::imap(measures, function(measure, i) {
+        df <- extract_items_df(items)
+        df[[measure]] <- unlist(json$cubes[[i]][[1]])
+        df
+    })
+    names(dfs) <- measures
 
-    # Return the data for this cube
-    list(
-        fields = fields,
-        items = items,
-        uris = uris,
-        df = df
-    )
+    # Simplify if requested and return
+    if (simplify && length(measures) == 1) {
+        list(
+            measure = measures[[1]],
+            fields = fields,
+            items = items,
+            uris = uris,
+            df = dfs[[1]])
+    } else {
+        list(
+            measures = measures,
+            fields = fields,
+            items = items,
+            uris = uris,
+            dfs = dfs)
+    }
 }
 
-#' Extract a dataframe of the item combinations represented in a query result
+#' Extract a dataframe of the item combinations represented in query results
 #'
 #' @param items The list of items for a query result.
 #' @return A dataframe of the item combinations represented in the result.

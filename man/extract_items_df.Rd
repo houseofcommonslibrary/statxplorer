@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract.R
 \name{extract_items_df}
 \alias{extract_items_df}
-\title{Extract a dataframe of the item combinations represented in a query result}
+\title{Extract a dataframe of the item combinations represented in query results}
 \usage{
 extract_items_df(items)
 }
@@ -13,6 +13,6 @@ extract_items_df(items)
 A dataframe of the item combinations represented in the result.
 }
 \description{
-Extract a dataframe of the item combinations represented in a query result
+Extract a dataframe of the item combinations represented in query results
 }
 \keyword{internal}

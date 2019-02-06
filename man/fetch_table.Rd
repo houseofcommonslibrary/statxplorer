@@ -13,38 +13,43 @@ fetch_table(query, filename, simplify = TRUE)
 This argument is not required but has priority: if a \code{filename} is
 provided, the \code{query} argument is ignored.}
 
-\item{simplify}{If TRUE and the result contains only one data cube, return
-just that cube. The default value is TRUE.}
+\item{simplify}{If TRUE and the results contain only one measure, don't nest
+the measure and results data within unecessary lists.}
 }
 \value{
 A list containing the results of the query, with one item per cube.
 }
 \description{
 \code{fetch_table} sends a query to the table endpoint and returns the
-response as a list of data cubes, each containing a list of data items for
-each cube.
+response as a list containing the results. The results include a dataframe
+of tidy data for each measure requested by the query.
 }
 \details{
-A query may be provided as a string or can be loaded from a file using the
-\code{filename} argument. In most cases this is more convenient as
-Stat-Xplore queries can be large and are most easily produced using the
-table builder tool on the website.
+A query can be provided as a string or can be loaded from a file using the
+\code{filename} argument. This is sometimes convenient as Stat-Xplore
+queries can be large and are most easily produced using the table builder
+tool on the website, which exports queries as json text files.
 
-Stat-Xplore returns one data cube of results for each measure included in
-the query. In plain english, cubes that are produced from the same query
-show different results for different measures but within the same table
-structure.
+Stat-Xplore returns one set of results for each measure included in a query.
+Each set of results includes data for different measures on the same set of
+observations.
 
-If a query returns more than one cube, the function returns a list of cubes
-where each cube is named according to the name of the measure it contains.
-If there is only one cube in the results for a query and \code{simplify} is
-set to TRUE (the default), a single cube is returned.
+The list of results has the following structure:
 
-In the results of this function, each cube is represented as a list with the
-following data items:
-
+measure / measures - the names of the measures for each dataset (str / list)
 fields - the names of categorical variables represented in the data (list)
 items - the names of the categories or levels within each field (list)
 uris - the uris of the categories or levels within each field (list)
-df - a dataframe of the categories and values in long form (tibble)
+df / dfs - a dataframe for each measure in long form (list / tibble)
+
+If a query requests data on only one measure and \code{simplify} is
+set to \code{TRUE}, then \code{relusts$measure} is a string containg the
+measure name and \code{results$df} if a dataframe containing the results.
+
+If a query requests data on more than one measure, or \code{simplify} is set
+to \code{FALSE}, the measure names are stored as a list in
+\code{results$measures} and the dataframes for each measure are stored as a
+list in \code{results$dfs}.
+
+\code{simplify} is \code{TRUE} by default.
 }
