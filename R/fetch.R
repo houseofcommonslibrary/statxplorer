@@ -84,7 +84,7 @@ request_table <- function(query) {
 #' @return A list containing the results of the query, with one item per cube.
 #' @export
 
-fetch_table <- function(query, filename, simplify = TRUE) {
+fetch_table <- function(query, filename = NULL, simplify = TRUE) {
 
     # Read the query from a file if given
     if (! is.null(filename)) query <- readr::read_file(filename)

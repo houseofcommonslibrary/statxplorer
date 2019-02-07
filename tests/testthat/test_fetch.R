@@ -7,12 +7,6 @@ source("validate.R")
 
 # Setup -----------------------------------------------------------------------
 
-# Load api key
-load_api_key(file.path("..", "..", "docs", "api_key.txt"))
-
-# Check api is available
-api_available <- check_api()
-
 # Load queries
 example_1_query <- readr::read_file(file.path(
     READ_TEST_DATA_DIR, "example_1_query.json"))
