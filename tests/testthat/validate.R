@@ -2,18 +2,18 @@
 
 # About -----------------------------------------------------------------------
 
-# The functions in this folder are used to record the output of the api and
-# functions that process that data in order to produce mocks and check if the
-# expected behaviour of the functions has changed. The file paths are set so
-# that you can source this file from the package route during development to
-# generate the test data, and source it from within the tests to use it. You
-# must set an api key before using the functions in this file to generate data.
+# The functions in this folder are used to record the output of the api and the
+# functions that process that data in order to produce mocks and to check if
+# the expected behaviour of the functions has changed. The file paths are set
+# so that you can source this file from within the package during development
+# to generate the test data, and source it from within the tests to use it for
+# testing. You must set an api key before using the functions in this file to
+# generate data.
 
 # Constants -------------------------------------------------------------------
 
-READ_TEST_DATA_DIR <- file.path("data")
-WRITE_TEST_DATA_DIR <- file.path("tests", "testthat", "data")
-READ_QUERY_DIR <- file.path("tests", "testthat", "queries")
+READ_TEST_DIR <- file.path("data")
+WRITE_TEST_DIR <- file.path("tests", "testthat", "data")
 
 # Read and write data ---------------------------------------------------------
 
@@ -22,7 +22,7 @@ READ_QUERY_DIR <- file.path("tests", "testthat", "queries")
 #' @keywords internal
 
 read_data <- function(filename) {
-    readRDS(file.path(READ_TEST_DATA_DIR,
+    readRDS(file.path(READ_TEST_DIR,
                       stringr::str_glue("{filename}.RData")))
 }
 
@@ -31,7 +31,7 @@ read_data <- function(filename) {
 #' @keywords internal
 
 write_data <- function(df, filename) {
-    saveRDS(df, file.path(WRITE_TEST_DATA_DIR,
+    saveRDS(df, file.path(WRITE_TEST_DIR,
                           stringr::str_glue("{filename}.RData")))
 }
 
@@ -40,9 +40,9 @@ write_data <- function(df, filename) {
 #' @keywords internal
 
 read_query <- function(example_name) {
-    readr::read_file(file.path(READ_QUERY_DIR,
+    readr::read_file(file.path(READ_TEST_DIR,
                                stringr::str_glue(
-                                   "{example_name}_query.json")))
+                                   "{example_name}.json")))
 }
 
 #' Send a query to the api and get the text of the http response body
@@ -54,8 +54,7 @@ send_query <- function(query) {
     headers <- httr::add_headers(
         "APIKey" = api_key,
         "Content-Type" = "application/json")
-    response <- httr::POST(URL_TABLE, headers, body = query, encode = "form")
-    httr::content(response, as = "text", encoding = "utf-8")
+    httr::POST(URL_TABLE, headers, body = query, encode = "form")
 }
 
 # Fetch test data -------------------------------------------------------------
@@ -64,19 +63,22 @@ send_query <- function(query) {
 #'
 #' @keywords internal
 
-fetch_example_data <- function(example_name) {
+fetch_example_data <- function(example) {
 
-    query <- read_query(example_name)
+    query <- readr::read_file(file.path(
+        WRITE_TEST_DIR,
+        stringr::str_glue("{example}_query.json")))
+
     http_response <- send_query(query)
     json_response <- request_table(query)
     results <- extract_results(json_response)
 
-    write_data(http_response, "{example_name}_http_response")
-    write_data(json_response, "{example_name}_json_response")
-    write_data(results, "{example_name}_results")
+    write_data(http_response, stringr::str_glue("{example}_http_response"))
+    write_data(json_response, stringr::str_glue("{example}_json_response"))
+    write_data(results, stringr::str_glue("{example}_results"))
 }
 
 fetch_test_data <- function() {
-    fetch_example_data("example_1")
+    fetch_example_data("example_a")
 }
 

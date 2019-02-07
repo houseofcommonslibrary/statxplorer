@@ -7,20 +7,19 @@ source("validate.R")
 
 # Setup -----------------------------------------------------------------------
 
-# Load queries
-example_1_query <- readr::read_file(file.path(
-    READ_TEST_DATA_DIR, "example_1_query.json"))
-
-# Load responses
-example_1_response <- readRDS(file.path(
-    READ_TEST_DATA_DIR, "example_1_response.RData"))
+# Load test data
+example_a_query <- read_query(file.path("example_a_query"))
+example_a_http_response <- read_data("example_a_http_response")
+example_a_json_response <- read_data("example_a_json_response")
 
 # Tests -----------------------------------------------------------------------
 
-test_that("request_table sends and receives a query", {
+test_that("request_table process the response from example a", {
+    with_mock(
+        "statxplorer::get_api_key" = function() {""},
+        "httr::POST" = function(url, headers, body = NULL, encode = NULL) {example_a_http_response}, {
 
-    if (!api_available) skip("skipped as api could not be reached")
-
-    response <- request_table(example_1_query)
-    expect_identical(response, example_1_response)
+        response <- request_table(example_a_query)
+        expect_identical(response, example_a_json_response)
+    })
 })
