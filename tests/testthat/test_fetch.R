@@ -79,9 +79,9 @@ test_that("request_table processes the response from example_b_query", {
         "statxplorer::get_api_key" = function() {},
         "httr::POST" = get_mock_post(example_b_http_response), {
 
-            response <- request_table(example_b_query)
-            expect_identical(response, example_b_json_response)
-        })
+        response <- request_table(example_b_query)
+        expect_identical(response, example_b_json_response)
+    })
 })
 
 test_that("fetch_table processes the response from example_b_query", {
@@ -89,9 +89,9 @@ test_that("fetch_table processes the response from example_b_query", {
         "statxplorer::request_table" =
             get_mock_request_table(example_b_json_response), {
 
-                results <- fetch_table(example_b_query)
-                expect_identical(results, example_b_results)
-            })
+        results <- fetch_table(example_b_query)
+        expect_identical(results, example_b_results)
+    })
 })
 
 test_that("fetch_table processes example_b_query unsimplified", {
@@ -109,8 +109,8 @@ test_that("fetch_table loads and processes example_b_query from a file", {
         "statxplorer::request_table" =
             get_mock_request_table(example_b_json_response), {
 
-                results <- fetch_table(
-                    filename = file.path(READ_TEST_DIR, "example_b_query.json"))
-                expect_identical(results, example_b_results)
-            })
+        results <- fetch_table(
+            filename = file.path(READ_TEST_DIR, "example_b_query.json"))
+        expect_identical(results, example_b_results)
+    })
 })
