@@ -17,38 +17,26 @@ WRITE_TEST_DIR <- file.path("tests", "testthat", "data")
 
 # Read and write data ---------------------------------------------------------
 
-#' Read a file from the data directory
-#'
-#' @keywords internal
-
+# Read a file from the data directory
 read_data <- function(filename) {
     readRDS(file.path(READ_TEST_DIR,
                       stringr::str_glue("{filename}.RData")))
 }
 
-#' Write a tibble to the data directory
-#'
-#' @keywords internal
-
+# Write a tibble to the data directory
 write_data <- function(df, filename) {
     saveRDS(df, file.path(WRITE_TEST_DIR,
                           stringr::str_glue("{filename}.RData")))
 }
 
-#' Read a query from the queries directory
-#'
-#' @keywords internal
-
+# Read a query from the queries directory
 read_query <- function(example_name) {
     readr::read_file(file.path(READ_TEST_DIR,
                                stringr::str_glue(
                                    "{example_name}.json")))
 }
 
-#' Send a query to the api and get the text of the http response body
-#'
-#' @keywords internal
-
+# Send a query to the api and get the text of the http response body
 send_query <- function(query) {
     api_key <- get_api_key()
     headers <- httr::add_headers(
@@ -59,10 +47,7 @@ send_query <- function(query) {
 
 # Fetch test data -------------------------------------------------------------
 
-#' Fetch data for unit tests for a given example query
-#'
-#' @keywords internal
-
+# Fetch data for unit tests for a given example query
 fetch_example_data <- function(example) {
 
     query <- readr::read_file(file.path(
@@ -78,6 +63,7 @@ fetch_example_data <- function(example) {
     write_data(results, stringr::str_glue("{example}_results"))
 }
 
+# Fetch all data for unit tests for a given example query
 fetch_test_data <- function() {
     fetch_example_data("example_a")
 }

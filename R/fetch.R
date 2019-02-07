@@ -95,26 +95,3 @@ fetch_table <- function(query, filename = NULL, simplify = TRUE) {
     # Extract results
     extract_results(response_json, simplify)
 }
-
-#' Check if R can reach the api and return a boolean
-#'
-#' @keywords internal
-
-check_api <- function() {
-
-    # Get api key from cache
-    api_key <- get_api_key()
-
-    # Set headers
-    headers <- httr::add_headers(
-        "APIKey" = api_key,
-        "Content-Type" = "application/json")
-
-    # Send request to the info endpoint
-    tryCatch({
-        response <- httr::GET(URL_INFO, headers)
-        response$status_code == 200
-    }, error = function(e) {
-        FALSE
-    })
-}

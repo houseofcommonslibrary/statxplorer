@@ -4,7 +4,7 @@
 \alias{fetch_table}
 \title{Send a table query and return the results}
 \usage{
-fetch_table(query, filename, simplify = TRUE)
+fetch_table(query, filename = NULL, simplify = TRUE)
 }
 \arguments{
 \item{query}{Stat-Xplore query as a string.}
