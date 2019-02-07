@@ -57,14 +57,17 @@ fetch_example_data <- function(example) {
     http_response <- send_query(query)
     json_response <- request_table(query)
     results <- extract_results(json_response)
+    results_us <- extract_results(json_response, simplify = FALSE)
 
     write_data(http_response, stringr::str_glue("{example}_http_response"))
     write_data(json_response, stringr::str_glue("{example}_json_response"))
     write_data(results, stringr::str_glue("{example}_results"))
+    write_data(results_us, stringr::str_glue("{example}_results_us"))
 }
 
 # Fetch all data for unit tests for a given example query
 fetch_test_data <- function() {
     fetch_example_data("example_a")
+    fetch_example_data("example_b")
 }
 

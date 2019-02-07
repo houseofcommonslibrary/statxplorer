@@ -2,6 +2,6 @@
 
 statxplorer is an R package for downloading data from the Department for Work and Pensions [Stat-Xplore](https://stat-xplore.dwp.gov.uk/webapi/jsf/login.xhtml) API. 
 
-The package supports a workflow where custom queries can be designed and downloaded from the Stat-Xplore web interface or written by hand and then used to fetch the tables from the API as tibbles. This package currently only uses the table endpoint of the API.
+The package make it easy to send queries to the API and receive a simple list of the results, which includes a dataframe of tidy data ready for analysis. The package supports a workflow of designing queries in the Stat-Xplore web interface, or by hand, and then using them to retrieve the data. Queries can be loaded directly from files in the call to the API.
 
-This is currently work in progess.
+This package has principally been developed to support automation and reproducible research in the House of Commons Library, but may be useful to other researchers who routinely work with DWP data. It is currently a work in progess.
