@@ -136,3 +136,5 @@ To make it easier to extract and use these ids, the package has a function calle
 ```r
 results <- add_codes_for_field(results, "Family Type", "Family Type Codes")
 ```
+
+If the given field does not exist, or the given column name already exists, the function will throw an error. 
