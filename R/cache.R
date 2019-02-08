@@ -10,6 +10,19 @@ CACHE_API_KEY = "api_key"
 
 # Cache access: api key -------------------------------------------------------
 
+#' Set the api key
+#'
+#' \code{set_api_key} sets the api key that the package uses for communciation
+#' with the server.
+#'
+#' @param api_key A valid Stat-Xplore api key.
+#' @return NULL
+#' @export
+
+set_api_key <- function(api_key) {
+    assign(CACHE_API_KEY, api_key, envir = cache)
+}
+
 #' Get the api key
 #'
 #' \code{get_api_key} gets the api key that the package uses for communciation
@@ -23,19 +36,6 @@ get_api_key <- function() {
         stop("No API key provided: use set_api_key to provide your key")
     }
     get(CACHE_API_KEY, envir = cache)
-}
-
-#' Set the api key
-#'
-#' \code{set_api_key} sets the api key that the package uses for communciation
-#' with the server.
-#'
-#' @param api_key A valid Stat-Xplore api key.
-#' @return NULL
-#' @export
-
-set_api_key <- function(api_key) {
-    assign(CACHE_API_KEY, api_key, envir = cache)
 }
 
 #' Loads the api key from a file
