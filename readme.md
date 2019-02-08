@@ -42,7 +42,12 @@ Suppose you have this query stored in a file called **uc-households.json**, whic
   "measures" : [ "str:count:UC_Households:V_F_UC_HOUSEHOLDS" ],
   "recodes" : {
     "str:field:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE" : {
-      "map" : [ [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE:C_UC_FAMILY_TYPE:1" ], [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE:C_UC_FAMILY_TYPE:2" ], [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE:C_UC_FAMILY_TYPE:3" ], [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE:C_UC_FAMILY_TYPE:4" ], [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE:C_UC_FAMILY_TYPE:99" ] ],
+      "map" : [
+          [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE:C_UC_FAMILY_TYPE:1" ],
+          [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE:C_UC_FAMILY_TYPE:2" ],
+          [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE:C_UC_FAMILY_TYPE:3" ],
+          [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE:C_UC_FAMILY_TYPE:4" ],
+          [ "str:value:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE:C_UC_FAMILY_TYPE:99" ] ],
       "total" : true
     },
     "str:field:UC_Households:F_UC_DATE:DATE_NAME" : {
@@ -50,7 +55,9 @@ Suppose you have this query stored in a file called **uc-households.json**, whic
       "total" : false
     }
   },
-  "dimensions" : [ [ "str:field:UC_Households:F_UC_DATE:DATE_NAME" ], [ "str:field:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE" ] ]
+  "dimensions" : [
+      [ "str:field:UC_Households:F_UC_DATE:DATE_NAME" ],
+      [ "str:field:UC_Households:V_F_UC_HOUSEHOLDS:HNFAMILY_TYPE" ] ]
 }
 ```
 
