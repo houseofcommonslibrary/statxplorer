@@ -35,7 +35,10 @@ request_table <- function(query) {
     response_text <- httr::content(response, as = "text", encoding = "utf-8")
 
     # If the server returned an error raise it with the response text
-    if (response$status_code != 200) stop(request_error(response_text))
+    if (response$status_code != 200) {
+        stop(stringr::str_glue(
+            "The server responded with the error message: {response_text}"))
+    }
 
     # Process the JSON, and return
     jsonlite::fromJSON(response_text, simplifyVector = FALSE)
@@ -58,33 +61,20 @@ request_table <- function(query) {
 #'
 #' The list of results has the following structure:
 #'
-#' measure / measures - the names of the measures for each dataset (str / list)
-#' fields - the names of categorical variables represented in the data (list)
+#' measures - the names of the measures for each dataset (character)
+#' fields - the names of categorical variables included in the data (character)
 #' items - the names of the categories or levels within each field (list)
 #' uris - the uris of the categories or levels within each field (list)
-#' df / dfs - a dataframe for each measure in long form (list / tibble)
-#'
-#' If a query requests data on only one measure and \code{simplify} is
-#' set to \code{TRUE}, then \code{relusts$measure} is a string containg the
-#' measure name and \code{results$df} if a dataframe containing the results.
-#'
-#' If a query requests data on more than one measure, or \code{simplify} is set
-#' to \code{FALSE}, the measure names are stored as a list in
-#' \code{results$measures} and the dataframes for each measure are stored as a
-#' list in \code{results$dfs}.
-#'
-#' \code{simplify} is \code{TRUE} by default.
+#' dfs - a dataframe for each measure with the data in long form (list)
 #'
 #' @param query Stat-Xplore query as a string.
 #' @param filename The path to a text file containing a Stat-Xplore query.
 #'   This argument is not required but has priority: if a \code{filename} is
 #'   provided, the \code{query} argument is ignored.
-#' @param simplify If TRUE and the results contain only one measure, don't nest
-#'   the measure and results data within unecessary lists.
 #' @return A list containing the results of the query, with one item per cube.
 #' @export
 
-fetch_table <- function(query, filename = NULL, simplify = TRUE) {
+fetch_table <- function(query, filename = NULL) {
 
     # Read the query from a file if given
     if (! is.null(filename)) query <- readr::read_file(filename)
@@ -93,5 +83,5 @@ fetch_table <- function(query, filename = NULL, simplify = TRUE) {
     response_json <- request_table(query)
 
     # Extract results
-    extract_results(response_json, simplify)
+    extract_results(response_json)
 }

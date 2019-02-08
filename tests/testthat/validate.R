@@ -3,12 +3,12 @@
 # About -----------------------------------------------------------------------
 
 # The functions in this folder are used to record the output of the api and the
-# functions that process that data in order to produce mocks and to check if
+# functions that process that data in order to produce mocks, and to check if
 # the expected behaviour of the functions has changed. The file paths are set
 # so that you can source this file from within the package during development
 # to generate the test data, and source it from within the tests to use it for
-# testing. You must set an api key before using the functions in this file to
-# generate data.
+# testing. You must set an api key before using the functions in this file in
+# order to generate the data.
 
 # Constants -------------------------------------------------------------------
 
@@ -57,12 +57,12 @@ fetch_example_data <- function(example) {
     http_response <- send_query(query)
     json_response <- request_table(query)
     results <- extract_results(json_response)
-    results_us <- extract_results(json_response, simplify = FALSE)
+    results_codes <- add_codes_for_field(results, results$fields[[1]], "Codes")
 
     write_data(http_response, stringr::str_glue("{example}_http_response"))
     write_data(json_response, stringr::str_glue("{example}_json_response"))
     write_data(results, stringr::str_glue("{example}_results"))
-    write_data(results_us, stringr::str_glue("{example}_results_us"))
+    write_data(results_codes, stringr::str_glue("{example}_results_codes"))
 }
 
 # Fetch all data for unit tests for a given example query

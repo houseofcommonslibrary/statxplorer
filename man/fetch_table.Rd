@@ -4,7 +4,7 @@
 \alias{fetch_table}
 \title{Send a table query and return the results}
 \usage{
-fetch_table(query, filename = NULL, simplify = TRUE)
+fetch_table(query, filename = NULL)
 }
 \arguments{
 \item{query}{Stat-Xplore query as a string.}
@@ -12,9 +12,6 @@ fetch_table(query, filename = NULL, simplify = TRUE)
 \item{filename}{The path to a text file containing a Stat-Xplore query.
 This argument is not required but has priority: if a \code{filename} is
 provided, the \code{query} argument is ignored.}
-
-\item{simplify}{If TRUE and the results contain only one measure, don't nest
-the measure and results data within unecessary lists.}
 }
 \value{
 A list containing the results of the query, with one item per cube.
@@ -36,20 +33,9 @@ observations.
 
 The list of results has the following structure:
 
-measure / measures - the names of the measures for each dataset (str / list)
-fields - the names of categorical variables represented in the data (list)
+measures - the names of the measures for each dataset (character)
+fields - the names of categorical variables included in the data (character)
 items - the names of the categories or levels within each field (list)
 uris - the uris of the categories or levels within each field (list)
-df / dfs - a dataframe for each measure in long form (list / tibble)
-
-If a query requests data on only one measure and \code{simplify} is
-set to \code{TRUE}, then \code{relusts$measure} is a string containg the
-measure name and \code{results$df} if a dataframe containing the results.
-
-If a query requests data on more than one measure, or \code{simplify} is set
-to \code{FALSE}, the measure names are stored as a list in
-\code{results$measures} and the dataframes for each measure are stored as a
-list in \code{results$dfs}.
-
-\code{simplify} is \code{TRUE} by default.
+dfs - a dataframe for each measure with the data in long form (list)
 }
