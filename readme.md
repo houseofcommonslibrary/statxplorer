@@ -32,7 +32,7 @@ load_api_key("api_key.txt")
 
 ## Sending queries
 
-Stat-Xplore queries can be verbose. You can generate by them yourself according to the [JSON schema](https://stat-xplore.dwp.gov.uk/webapi/online-help/Open-Data-API-Table.html), but it is easiest to start by designing a query in Stat-Xplore's web interface and downloading it as a JSON file (choose "Open Data API Query" as the download option in the web interface).
+Stat-Xplore queries can be verbose. You can generate them yourself according to the [JSON schema](https://stat-xplore.dwp.gov.uk/webapi/online-help/Open-Data-API-Table.html), but it is easiest to start by designing a query in Stat-Xplore's web interface and downloading it as a JSON file (choose "Open Data API Query" as the download option in the web interface).
 
 Suppose you have this query stored in a file called **uc-households.json**, which requests the number of households claiming Universal Credit in August 2018 broken down by household type.
 
@@ -77,11 +77,11 @@ results <- fetch_table(filename = "uc-households.json")
 
 The results of the query are returned as a list with the following elements:
 
-- **measures** -- the names of the measures for each dataset (*character*)
-- **fields** -- the names of categorical variables included in the data (*character*)
-- **items** -- the names of the categories or levels within each field (*list*)
-- **uris** -- the uris of the categories or levels within each field (*list*)
-- **dfs** -- a dataframe for each measure with the data in long form (*list*)
+- **measures** - the names of the measures for each dataset (*character*)
+- **fields** - the names of categorical variables included in the data (*character*)
+- **items** - the names of the categories or levels within each field (*list*)
+- **uris** - the uris of the categories or levels within each field (*list*)
+- **dfs** - a dataframe for each measure with the data in long form (*list*)
 
 The results of the query shown above look like this:
 
