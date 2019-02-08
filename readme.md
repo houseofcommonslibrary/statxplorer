@@ -77,11 +77,11 @@ results <- fetch_table(filename = "uc-households.json")
 
 The results of the query are returned as a list with the following elements:
 
-- measures - the names of the measures for each dataset (character)
-- fields - the names of categorical variables included in the data (character)
-- items - the names of the categories or levels within each field (list)
-- uris - the uris of the categories or levels within each field (list)
-- dfs - a dataframe for each measure with the data in long form (list)
+- **measures** -- the names of the measures for each dataset (*character*)
+- **fields** -- the names of categorical variables included in the data (*character*)
+- **items** -- the names of the categories or levels within each field (*list*)
+- **uris** -- the uris of the categories or levels within each field (*list*)
+- **dfs** -- a dataframe for each measure with the data in long form (*list*)
 
 The results of the query shown above look like this:
 
