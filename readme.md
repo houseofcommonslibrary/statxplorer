@@ -34,7 +34,7 @@ load_api_key("api_key.txt")
 
 Stat-Xplore queries can be verbose. You can generate them yourself according to the [JSON schema](https://stat-xplore.dwp.gov.uk/webapi/online-help/Open-Data-API-Table.html), but it is easiest to start by designing a query in Stat-Xplore's web interface and downloading it as a JSON file (choose "Open Data API Query" as the download option in the web interface).
 
-Suppose you have this query stored in a file called **uc-households.json**, which requests the number of households claiming Universal Credit in August 2018 broken down by household type.
+Suppose you have this query stored in a file called **uc-households.json**, which requests the number of households claiming Universal Credit in August 2018 broken down by family type.
 
 ```json
 {
@@ -61,7 +61,7 @@ Suppose you have this query stored in a file called **uc-households.json**, whic
 }
 ```
 
-You can download the data for this query using `fetch_table`, either by passing the query as a string to the `fetch_table function`, or by loading it from a file with the `filename` argument.
+You can download the data for this query using `fetch_table`, either by passing the query as a string to the `fetch_table` functio`, or by loading it from a file with the `filename` argument.
 
 ```r
 # Pass the query directly
@@ -134,7 +134,7 @@ Stat-Xplore provides ids for each variable in the URI strings. These URIs someti
 To make it easier to extract and use these ids, the package has a function called `add_codes_for_field`. This will attempt to create a new column in each of the results dataframes containing the codes for a given field. To add a set of codes to the dataframes in the results, call `add_codes_for_field` with the results you want to modify, the name of the field for which you want to add codes, and the name of the column that will contain the codes.
 
 ```r
-results <- add_codes_for_field(results, "Family Type", "Family Type Codes")
+results <- add_codes_for_field(results, field = "Family Type", colname = "Family Type Codes")
 ```
 
 If the given field does not exist, or the given column name already exists, the function will throw an error. 
