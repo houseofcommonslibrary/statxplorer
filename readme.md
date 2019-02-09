@@ -61,7 +61,7 @@ Suppose you have this query stored in a file called **uc-households.json**, whic
 }
 ```
 
-You can download the data for this query using `fetch_table`, either by passing the query as a string to the `fetch_table` functio`, or by loading it from a file with the `filename` argument.
+You can download the data for this query using `fetch_table`, either by passing the query as a string to the `fetch_table` function, or by loading it from a file with the `filename` argument.
 
 ```r
 # Pass the query directly
