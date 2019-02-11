@@ -138,3 +138,7 @@ results <- add_codes_for_field(results, field = "Family Type", colname = "Family
 ```
 
 If the given field does not exist, or the given column name already exists, the function will throw an error. 
+
+## API Issues
+
+Every now and again the Stat-Xplore API fails to respond to a request that it normally returns correctly. This results in a timeout with the error message `Error in curl::curl_fetch_memory(url, handle = handle)`. This appears to be an issue with the server itself: waiting and trying again later normally resolves this issue. I have reported the problem to the Stat-Xplore team. 
