@@ -4,6 +4,8 @@ statxplorer is an R package for downloading tabular data from the Department for
 
 This package lets you send queries to the Stat-XPlore API and receive the results in a simple and manageable data structure, which includes dataframes of tidy data ready for analysis. The package supports a workflow of designing queries in the Stat-Xplore web interface (or by hand) and then using them to retrieve the data programatically from the API's [Table](https://stat-xplore.dwp.gov.uk/webapi/online-help/Open-Data-API-Table.html) endpoint. Queries can be loaded directly from files when you send a request for the data.
 
+__Please note that this package does not yet support queries that contain custom aggregate variables in the results. I am working on a solution for this.__
+
 This package has principally been developed to support automation and reproducible research in the House of Commons Library, but may be useful to other researchers who routinely work with DWP data. Please let me know if you have any feedback or find any bugs.
 
 ## Installation
