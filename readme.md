@@ -2,11 +2,9 @@
 
 statxplorer is an R package for downloading tabular data from the Department for Work and Pensions [Stat-Xplore](https://stat-xplore.dwp.gov.uk/webapi/jsf/login.xhtml) API. 
 
-This package lets you send queries to the Stat-XPlore API and receive the results in a simple and manageable data structure, which includes dataframes of tidy data ready for analysis. The package supports a workflow of designing queries in the Stat-Xplore web interface (or by hand) and then using them to retrieve the data programatically from the API's [Table](https://stat-xplore.dwp.gov.uk/webapi/online-help/Open-Data-API-Table.html) endpoint. Queries can be loaded directly from files when you send a request for the data.
+This package lets you send queries to the Stat-XPlore API and receive the results in a simple and manageable data structure, which includes dataframes of tidy data ready for analysis. The package supports a workflow of designing queries in the Stat-Xplore web interface (or by hand) and then using them to retrieve the data programatically from the API's [Table](https://stat-xplore.dwp.gov.uk/webapi/online-help/Open-Data-API-Table.html) endpoint. Queries can be loaded directly from files when you send a request for the data. Please note that this package does not currently support custom aggregate variables (see below).
 
-__Please note that this package does not yet support queries that contain custom aggregate variables in the results. I am working on a solution for this.__
-
-This package has principally been developed to support automation and reproducible research in the House of Commons Library, but may be useful to other researchers who routinely work with DWP data. Please let me know if you have any feedback or find any bugs.
+This package has principally been developed to support automation and reproducible research in the House of Commons Library, but may be useful to other researchers who routinely work with DWP data. Let me know if you have any feedback or find any bugs.
 
 ## Installation
 
@@ -140,6 +138,10 @@ results <- add_codes_for_field(results, field = "Family Type", colname = "Family
 ```
 
 If the given field does not exist, or the given column name already exists, the function will throw an error. 
+
+## Custom aggregate variables
+
+This package does not yet support queries that request custom aggregate variables in the results: `fetch_table` will throw an error if your query contains a custom aggergate variable. This is becuase the results from the Stat-Xplore API do not indicate that a custom aggegate has been used and instead list all of the individual items that have been aggregated to produce it, so the number of items and the number of values in the results do not match. I am working on a solution for this.
 
 ## API Issues
 

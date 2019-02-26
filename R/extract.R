@@ -31,7 +31,16 @@ extract_results <- function(json) {
 
     # Extract dataframes for measures
     dfs <- purrr::imap(measures, function(measure, i) {
+
         df <- extract_items_df(items)
+        values <- unlist(json$cubes[[i]][[1]])
+
+        if (nrow(df) != length(values)) {
+            stop(stringr::str_c(
+                "Could not process query results: does your query contain ",
+                "custom aggregate variables?"))
+        }
+
         df[[measure]] <- unlist(json$cubes[[i]][[1]])
         df
     })
