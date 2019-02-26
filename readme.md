@@ -141,7 +141,7 @@ If the given field does not exist, or the given column name already exists, the 
 
 ## Custom aggregate variables
 
-This package does not yet support queries that request custom aggregate variables in the results: `fetch_table` will throw an error if your query contains a custom aggergate variable. This is becuase the results from the Stat-Xplore API do not indicate that a custom aggegate has been used and instead list all of the individual items that have been aggregated to produce it, so the number of items and the number of values in the results do not match. I am working on a solution for this.
+This package does not currently support queries that request custom aggregate variables in the results: `fetch_table` will throw an error if your query contains a custom aggregate variable. This is becuase the results from the API do not indicate that a custom aggregate variable has been used and instead list all of the individual items that have been aggregated to produce it, so the number of items and the number of values in the results do not match. I am working on a solution for this.
 
 ## API Issues
 
