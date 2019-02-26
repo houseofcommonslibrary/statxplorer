@@ -38,7 +38,8 @@ extract_results <- function(json) {
         if (nrow(df) != length(values)) {
             stop(stringr::str_c(
                 "Could not process query results: does your query contain ",
-                "custom aggregate variables?"))
+                "custom aggregate variables? See: https://github.com/",
+                "olihawkins/statxplorer#custom-aggregate-variables"))
         }
 
         df[[measure]] <- unlist(json$cubes[[i]][[1]])
