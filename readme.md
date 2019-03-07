@@ -149,7 +149,7 @@ This is sometimes convenient but it comes with a cost: it breaks the relationshi
 
 However, it is still possible to use `fetch_table` to process queries that use custom aggregate variables. You just need to provide the function with the missing metadata that it needs to handle the results. You can do this with the `custom` argument, which takes a named list. Each name in the list is the name of a field that contains custom variables, and each value is a character vector specifying the labels you wish to use for the variable items in that field.
 
-So for example, suppose you have a query that gets data on Housing Benefit claimants by age band, using custom age bands for people aged 16-64 and 65+, along with a total.
+So for example, suppose you have a query that gets data on Housing Benefit claimants by age band, using custom age bands for people aged 16-64 and 65+, along with a total, stored in a file called **hb-by-age.json**.
 
 ```r
 {
@@ -178,7 +178,7 @@ So for example, suppose you have a query that gets data on Housing Benefit claim
 }
 ```
 
-If this query was stored in a file called **hb-by-age.json** you would call `fetch_table` with the correct metadata in the following way:
+You would call `fetch_table` with the correct metadata in the following way:
 
 ```r
 custom <- list("Age of Claimant (bands only)" = c("16-64", "65+", "Total"))
