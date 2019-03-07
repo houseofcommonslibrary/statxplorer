@@ -4,7 +4,7 @@
 \name{statxplorer}
 \alias{statxplorer}
 \alias{statxplorer-package}
-\title{statxplorer: A package for downloading data from the Stat-Xplore API}
+\title{statxplorer: Download data from the Stat-Xplore API}
 \description{
 The statxplorer package provides a suite of functions for downloading data
 from the Department for Work and Pensions Stat-Xplore API.

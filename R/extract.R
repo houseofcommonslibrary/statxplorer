@@ -6,10 +6,16 @@
 #' data in a format suitable for analysis.
 #'
 #' @param json The results of the query as parsed json.
+#' @param custom A named list of character vectors. Each name/value pair
+#'   indicates the item labels to use for the field with the given name when
+#'   constructing the results dataframes. It is necessary to specify item
+#'   labels explicitly using this argument when your query uses custom
+#'   aggregate variables, as the number of variables in the results will not
+#'   agree with the number of variables shown in the metadata.
 #' @return A list of the results for the given cube.
 #' @export
 
-extract_results <- function(json) {
+extract_results <- function(json, custom = NULL) {
 
     # Extract measure labels
     measures <- purrr::map_chr(json$measures, function(measure) measure$label)
@@ -29,20 +35,33 @@ extract_results <- function(json) {
     })
     names(uris) <- fields
 
+    # If custom varaiable labels are specified, update the metadata
+    if (!is.null(custom)) {
+        for (nm in names(custom)){
+            items[[nm]] <- custom[[nm]]
+        }
+    }
+
     # Extract dataframes for measures
     dfs <- purrr::imap(measures, function(measure, i) {
 
         df <- extract_items_df(items)
         values <- unlist(json$cubes[[i]][[1]])
 
-        if (nrow(df) != length(values)) {
+        num_rows <- nrow(df)
+        num_values <- length(values)
+
+        if (num_rows != num_values) {
             stop(stringr::str_c(
-                "Could not process query results: does your query contain ",
-                "custom aggregate variables? See: https://github.com/",
-                "olihawkins/statxplorer#custom-aggregate-variables"))
+                "Could not process query results. ",
+                stringr::str_glue("There are {num_rows} item combinations "),
+                stringr::str_glue("but {num_values} values. ") ,
+                "Have you provided the correct metadata for custom aggregate ",
+                "variables? See: https://github.com/olihawkins/statxplorer",
+                "#custom-aggregate-variables"))
         }
 
-        df[[measure]] <- unlist(json$cubes[[i]][[1]])
+        df[[measure]] <- values
         df
     })
     names(dfs) <- measures

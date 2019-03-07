@@ -10,6 +10,6 @@ set_api_key(api_key)
 \item{api_key}{A valid Stat-Xplore api key.}
 }
 \description{
-\code{set_api_key} sets the api key that the package uses for communciation
+\code{set_api_key} sets the api key that the package uses for communiciation
 with the server.
 }

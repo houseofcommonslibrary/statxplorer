@@ -4,10 +4,17 @@
 \alias{extract_results}
 \title{Extract the results of a query from the response json}
 \usage{
-extract_results(json)
+extract_results(json, custom = NULL)
 }
 \arguments{
 \item{json}{The results of the query as parsed json.}
+
+\item{custom}{A named list of character vectors. Each name/value pair
+indicates the item labels to use for the field with the given name when
+constructing the results dataframes. It is necessary to specify item
+labels explicitly using this argument when your query uses custom
+aggregate variables, as the number of variables in the results will not
+agree with the number of variables shown in the metadata.}
 }
 \value{
 A list of the results for the given cube.

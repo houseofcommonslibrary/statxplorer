@@ -12,7 +12,7 @@ CACHE_API_KEY = "api_key"
 
 #' Set the api key
 #'
-#' \code{set_api_key} sets the api key that the package uses for communciation
+#' \code{set_api_key} sets the api key that the package uses for communiciation
 #' with the server.
 #'
 #' @param api_key A valid Stat-Xplore api key.

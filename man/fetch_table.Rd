@@ -4,7 +4,7 @@
 \alias{fetch_table}
 \title{Send a table query and return the results}
 \usage{
-fetch_table(query, filename = NULL)
+fetch_table(query, filename = NULL, custom = NULL)
 }
 \arguments{
 \item{query}{Stat-Xplore query as a string.}
@@ -12,6 +12,13 @@ fetch_table(query, filename = NULL)
 \item{filename}{The path to a text file containing a Stat-Xplore query.
 This argument is not required but has priority: if a \code{filename} is
 provided, the \code{query} argument is ignored.}
+
+\item{custom}{A named list of character vectors. Each name/value pair
+indicates the item labels to use for the field with the given name when
+constructing the results dataframes. It is necessary to specify item
+labels explicitly using this argument when your query uses custom
+aggregate variables, as the number of variables in the results will not
+agree with the number of variables shown in the metadata.}
 }
 \value{
 A list containing the results of the query, with one item per cube.

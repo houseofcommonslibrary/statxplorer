@@ -1,0 +1,15 @@
+{
+  "database" : "str:database:hb_new",
+  "measures" : [ "str:count:hb_new:V_F_HB_NEW" ],
+  "recodes" : {
+    "str:field:hb_new:F_HB_NEW_DATE:NEW_DATE_NAME" : {
+      "map" : [ [ "str:value:hb_new:F_HB_NEW_DATE:NEW_DATE_NAME:C_HB_NEW_DATE:201811" ] ],
+      "total" : false
+    },
+    "str:field:hb_new:V_F_HB_NEW:AGE_BAND" : {
+      "map" : [ [ "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:1", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:2", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:3", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:4", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:5", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:6", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:7" ], [ "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:8", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:9" ] ],
+      "total" : true
+    }
+  },
+  "dimensions" : [ [ "str:field:hb_new:V_F_HB_NEW:AGE_BAND" ], [ "str:field:hb_new:F_HB_NEW_DATE:NEW_DATE_NAME" ] ]
+}
