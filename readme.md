@@ -161,7 +161,16 @@ So for example, suppose you have a query that gets data on Housing Benefit claim
       "total" : false
     },
     "str:field:hb_new:V_F_HB_NEW:AGE_BAND" : {
-      "map" : [ [ "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:1", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:2", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:3", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:4", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:5", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:6", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:7" ], [ "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:8", "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:9" ] ],
+      "map" : [  
+        ["str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:1", 
+        "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:2", 
+        "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:3", 
+        "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:4", 
+        "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:5", 
+        "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:6", 
+        "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:7" ], 
+        ["str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:8", 
+        "str:value:hb_new:V_F_HB_NEW:AGE_BAND:V_C_AGE_BAND_2:9" ] ],
       "total" : true
     }
   },
@@ -217,7 +226,7 @@ $dfs$`Housing Benefit Claimants`
 3 Total                          201811 (Nov-18)                     3927676
 ```
 
-When specifying the `custom` metadata, you need to use the correct field names for the custom variables, and provide the correct number of labels, listed in the same order that they are defined within the query. As long as the `custom` argument correctly describes the structure of the variables you have used in your results, `fetch_table` should do the right thing. But it is *up to you to ensure you have described the missing metadata correctly*. You should verify that the labels in your results are aligned with the correct data by comparing your query results with the results of an equivalent query shown in the web interface.
+When specifying the `custom` metadata, you need to use the correct field names for the custom variables, and provide the correct number of labels, listed in the same order that they are defined within the query. As long as the `custom` argument correctly describes the structure of the variables you have used in your results, `fetch_table` should do the right thing. But it is up to you to ensure you have described the missing metadata correctly. You should verify that the labels in your results are aligned with the correct data by comparing your query results with the results of an equivalent query shown in the web interface.
 
 Please note that this is currently an experimental feature.
 
