@@ -48,7 +48,7 @@ send_query <- function(query) {
 # Fetch test data -------------------------------------------------------------
 
 # Fetch data for unit tests for a given example query
-fetch_example_data <- function(example) {
+fetch_example_data <- function(example, custom = NULL) {
 
     query <- readr::read_file(file.path(
         WRITE_TEST_DIR,
@@ -56,7 +56,7 @@ fetch_example_data <- function(example) {
 
     http_response <- send_query(query)
     json_response <- request_table(query)
-    results <- extract_results(json_response)
+    results <- extract_results(json_response, custom)
     results_codes <- add_codes_for_field(results, results$fields[[1]], "Codes")
 
     write_data(http_response, stringr::str_glue("{example}_http_response"))
@@ -69,5 +69,7 @@ fetch_example_data <- function(example) {
 fetch_test_data <- function() {
     fetch_example_data("example_a")
     fetch_example_data("example_b")
+    fetch_example_data("example_c", custom = list(
+        "Age of Claimant (bands only)" = c("16-64", "65+", "Total")))
 }
 

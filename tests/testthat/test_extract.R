@@ -17,7 +17,24 @@ example_b_json_response <- read_data("example_b_json_response")
 example_b_results <- read_data("example_b_results")
 example_b_results_codes <- read_data("example_b_results_codes")
 
+# Load test data for example_c_query
+example_c_json_response <- read_data("example_c_json_response")
+example_c_results <- read_data("example_c_results")
+example_c_results_codes <- read_data("example_c_results_codes")
+
 # Test extract_results --------------------------------------------------------
+
+test_that("extract_results throws an error if metadata and data don't match", {
+    expect_error(
+        extract_results(example_c_json_response),
+        stringr::str_c(
+            "Could not process query results. There are 6350 item ",
+            "combinations but 1905 values. Have you provided the correct ",
+            "metadata for custom aggregate variables? See: ",
+            "https://github.com/olihawkins/statxplorer",
+            "#custom-aggregate-variables"),
+        fixed = TRUE)
+})
 
 test_that("extract_results processes the response from example_a_query", {
     results <- extract_results(example_a_json_response)
@@ -27,6 +44,12 @@ test_that("extract_results processes the response from example_a_query", {
 test_that("extract_results processes the response from example_b_query", {
     results <- extract_results(example_b_json_response)
     expect_identical(results, example_b_results)
+})
+
+test_that("extract_results processes the response from example_c_query", {
+    results <- extract_results(example_c_json_response, custom = list(
+        "Age of Claimant (bands only)" = c("16-64", "65+", "Total")))
+    expect_identical(results, example_c_results)
 })
 
 # Test add_codes_for_field ----------------------------------------------------
