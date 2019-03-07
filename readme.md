@@ -2,7 +2,7 @@
 
 statxplorer is an R package for downloading tabular data from the Department for Work and Pensions [Stat-Xplore](https://stat-xplore.dwp.gov.uk/webapi/jsf/login.xhtml) API. 
 
-This package lets you send queries to the Stat-XPlore API and receive the results in a simple and manageable data structure, which includes dataframes of tidy data ready for analysis. The package supports a workflow of designing queries in the Stat-Xplore web interface (or by hand) and then using them to retrieve the data programatically from the API's [Table](https://stat-xplore.dwp.gov.uk/webapi/online-help/Open-Data-API-Table.html) endpoint. Queries can be loaded directly from files when you send a request for the data. Please note that queries that use custom aggregate variables need special handling (see below).
+This package lets you send queries to the Stat-XPlore API and receive the results in a simple and manageable data structure, which includes dataframes of tidy data ready for analysis. The package supports a workflow of designing queries in the Stat-Xplore web interface (or by hand) and then using them to retrieve the data programatically from the API's [Table](https://stat-xplore.dwp.gov.uk/webapi/online-help/Open-Data-API-Table.html) endpoint. Queries can be loaded directly from files when you send a request for the data. Please note that queries that use custom aggregate variables require special handling (see below).
 
 This package has principally been developed to support automation and reproducible research in the House of Commons Library, but may be useful to other researchers who routinely work with DWP data. Let me know if you have any feedback or find any bugs.
 
@@ -185,7 +185,7 @@ custom <- list("Age of Claimant (bands only)" = c("16-64", "65+", "Total"))
 results <- fetch_table(filename = "hb-by-age.json", custom = custom)
 ```
 
-The results look like this. Note that the URIs are **not modified**, and show the compnent age bands used in the custom variables.
+The results look like this. Note that the URIs are **not modified**, and show the component age bands used in the custom variables.
 
 ```r
 $measures
