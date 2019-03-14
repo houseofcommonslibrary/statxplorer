@@ -29,7 +29,7 @@ set_api_key <- function(api_key) {
 #' with the server from the package cache.
 #'
 #' @return The api key as a string
-#' @keywords internal
+#' @export
 
 get_api_key <- function() {
     if (! exists(CACHE_API_KEY, envir = cache)) {
