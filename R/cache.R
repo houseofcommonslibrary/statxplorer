@@ -33,7 +33,9 @@ set_api_key <- function(api_key) {
 
 get_api_key <- function() {
     if (! exists(CACHE_API_KEY, envir = cache)) {
-        stop("No API key provided: use set_api_key to provide your key")
+        stop(stringr::str_c(
+            "No API key provided: use statxplorer::set_api_key() or ",
+            "statxplorer::load_api_key() to provide your key"))
     }
     get(CACHE_API_KEY, envir = cache)
 }
