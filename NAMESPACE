@@ -3,6 +3,7 @@
 export(add_codes_for_field)
 export(extract_results)
 export(fetch_table)
+export(get_api_key)
 export(load_api_key)
 export(request_table)
 export(set_api_key)

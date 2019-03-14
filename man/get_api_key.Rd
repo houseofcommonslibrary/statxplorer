@@ -13,4 +13,3 @@ The api key as a string
 \code{get_api_key} gets the api key that the package uses for communciation
 with the server from the package cache.
 }
-\keyword{internal}
