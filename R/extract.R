@@ -1,4 +1,4 @@
-# Functions for extracting tabular data from query results
+### Functions for extracting tabular data from query results
 
 #' Extract the results of a query from the response json
 #'
