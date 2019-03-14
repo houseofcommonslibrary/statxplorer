@@ -1,7 +1,7 @@
 Package: statxplorer
 Type: Package
 Title: Download data from the DWP Stat-Xplore API
-Version: 0.2.3
+Version: 0.2.4
 Author: Oliver Hawkins
 Maintainer: Oliver Hawkins <oli@olihawkins.com>
 Description: A package for downloading tables from the DWP Stat-Xplore API. The 
