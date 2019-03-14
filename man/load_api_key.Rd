@@ -2,7 +2,7 @@
 % Please edit documentation in R/cache.R
 \name{load_api_key}
 \alias{load_api_key}
-\title{Loads the api key from a file}
+\title{Load the api key from a file}
 \usage{
 load_api_key(filename)
 }

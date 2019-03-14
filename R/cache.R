@@ -63,5 +63,5 @@ get_api_key <- function() {
 #' @export
 
 has_api_key <- function() {
-    exists(CACHE_API_KEY, envir = cache))
+    exists(CACHE_API_KEY, envir = cache)
 }
