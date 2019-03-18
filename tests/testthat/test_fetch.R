@@ -28,7 +28,7 @@ example_c_results <- read_data("example_c_results")
 # Mocks -----------------------------------------------------------------------
 
 get_mock_post <- function(response) {
-    function(url, headers, body = NULL, encode = NULL) {response}
+    function(url, headers, body = NULL, encode = NULL, timeout = 0) {response}
 }
 
 get_mock_request_table <- function(response) {

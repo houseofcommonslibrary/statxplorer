@@ -28,8 +28,17 @@ request_table <- function(query) {
         "APIKey" = api_key,
         "Content-Type" = "application/json")
 
-    # POST and retuen
-    response <- httr::POST(URL_TABLE, headers, body = query, encode = "form")
+    # POST and return
+    tryCatch({
+        response <- httr::POST(
+            URL_TABLE,
+            headers,
+            body = query,
+            encode = "form",
+            timeout = 60)},
+        error = function(c) {
+            stop("Could not connect to Stat-Xplore: the server may be down")
+        })
 
     # Extract the text
     response_text <- httr::content(response, as = "text", encoding = "utf-8")
