@@ -3,12 +3,12 @@
 \docType{data}
 \name{CACHE_API_KEY}
 \alias{CACHE_API_KEY}
-\title{API key cacge variable name}
+\title{API key cache variable name}
 \format{An object of class \code{character} of length 1.}
 \usage{
 CACHE_API_KEY
 }
 \description{
-API key cacge variable name
+API key cache variable name
 }
 \keyword{internal}
