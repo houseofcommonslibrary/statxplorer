@@ -14,7 +14,7 @@ cache <- new.env(parent = emptyenv())
 #'
 #' @keywords internal
 
-CACHE_API_KEY = "api_key"
+CACHE_API_KEY <- "api_key"
 
 # Cache access: api key -------------------------------------------------------
 
