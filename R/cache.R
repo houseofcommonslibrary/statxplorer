@@ -10,7 +10,7 @@ cache <- new.env(parent = emptyenv())
 
 # Constants -------------------------------------------------------------------
 
-#' API key environment variable
+#' API key cacge variable name
 #'
 #' @keywords internal
 
