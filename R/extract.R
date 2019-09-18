@@ -83,13 +83,8 @@ extract_results <- function(json, custom = NULL) {
 
 extract_items_df <- function(items) {
 
-    # Get a list of the items for each field as dataframes
-    items <- purrr::imap(items, function(items, field) {
-        tibble::tibble(!!field := items)
-    })
-
     # Create a dataframe of the combinations in order
-    do.call(tidyr::crossing, items)
+    do.call(tidyr::expand_grid, items)
 }
 
 #' Extract the codes for a given field and add them to the given dataframe
