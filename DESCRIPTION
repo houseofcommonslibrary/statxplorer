@@ -21,7 +21,7 @@ Imports:
     rlang,
     stringr,
     tibble,
-    tidyr
+    tidyr (>= 1.0.0)
 Suggests: 
     testthat
 RoxygenNote: 6.1.1
