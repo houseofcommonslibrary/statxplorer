@@ -1,14 +1,14 @@
-### Manage test data for validation
+### Record and retrieve test data for validation
 
 # About -----------------------------------------------------------------------
 
-# The functions in this folder are used to record the output of the api and the
+# The functions in this file are used to record the output of the api and the
 # functions that process that data in order to produce mocks, and to check if
 # the expected behaviour of the functions has changed. The file paths are set
-# so that you can source this file from within the package during development
-# to generate the test data, and source it from within the tests to use it for
-# testing. You must set an api key before using the functions in this file in
-# order to generate the data.
+# so that you can source this file from within the package project during
+# development to generate the test data, and source it from within the tests to
+# use it for testing. You must set an api key before using the functions in
+# this file in order to generate the data.
 
 # Constants -------------------------------------------------------------------
 
@@ -65,7 +65,7 @@ fetch_example_data <- function(example, custom = NULL) {
     write_data(results_codes, stringr::str_glue("{example}_results_codes"))
 }
 
-# Fetch all data for unit tests for a given example query
+# Fetch and save all data for unit tests
 fetch_test_data <- function() {
     fetch_example_data("example_a")
     fetch_example_data("example_b")
