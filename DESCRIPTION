@@ -24,4 +24,4 @@ Imports:
     tidyr (>= 1.0.0)
 Suggests: 
     testthat
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1

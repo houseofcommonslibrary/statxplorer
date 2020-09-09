@@ -4,7 +4,9 @@
 \name{CACHE_API_KEY}
 \alias{CACHE_API_KEY}
 \title{API key cache variable name}
-\format{An object of class \code{character} of length 1.}
+\format{
+An object of class \code{character} of length 1.
+}
 \usage{
 CACHE_API_KEY
 }

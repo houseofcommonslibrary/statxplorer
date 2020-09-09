@@ -3,7 +3,6 @@
 \docType{package}
 \name{statxplorer}
 \alias{statxplorer}
-\alias{statxplorer-package}
 \title{statxplorer: Download data from the Stat-Xplore API}
 \description{
 The statxplorer package provides a suite of functions for downloading data
