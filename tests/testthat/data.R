@@ -10,6 +10,10 @@
 # use it for testing. You must set an api key before using the functions in
 # this file in order to generate the data.
 
+# Load package ----------------------------------------------------------------
+
+devtools::load_all(".")
+
 # Constants -------------------------------------------------------------------
 
 READ_TEST_DIR <- file.path("data")
